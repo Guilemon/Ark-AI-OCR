@@ -2,6 +2,7 @@
 
 from flask import Flask, request, jsonify
 from pytesseract import pytesseract
+from transformers import AutoTokenizer, AutoModelForTokenClassification
 from transformers import pipeline
 import base64
 from io import BytesIO
@@ -9,8 +10,11 @@ from PIL import Image
 
 app = Flask(__name__)
 
-# Load NLP models (you have this knowledge)
-ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", revision="4c53496")  # Named entity recognition
+# Load NLP models
+tokenizer = AutoTokenizer.from_pretrained("dslim/bert-base-NER")
+model = AutoModelForTokenClassification.from_pretrained("dslim/bert-base-NER")
+
+ner = pipeline("ner", model=model, tokenizer=tokenizer)  # Named entity recognition
 
 @app.route('/extract', methods=['POST'])
 def extract():
