@@ -10,7 +10,7 @@ from PIL import Image
 app = Flask(__name__)
 
 # Load NLP models (you have this knowledge)
-ner = pipeline("ner")  # Named entity recognition
+ner = pipeline("ner", model="dbmdz/bert-large-cased-finetuned-conll03-english", revision="4c53496")  # Named entity recognition
 
 @app.route('/extract', methods=['POST'])
 def extract():
