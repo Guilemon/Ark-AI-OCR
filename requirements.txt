@@ -1,4 +1,4 @@
-Flask==3.0.0
-Pillow==10.1.0
-transformers==4.37.2
-pytesseract==0.3.10
+Flask
+Pillow
+transformers
+pytesseract
